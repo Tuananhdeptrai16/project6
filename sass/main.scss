@@ -1,0 +1,535 @@
+@use "./reset";
+@use "./grid";
+@use "./responsive";
+$primayColor: #fbfaff;
+$primaryText: #080415;
+$primaryText-gray: #51586a;
+$secondColor: #5d3bee;
+@mixin padding($t, $r, $bt, $l) {
+  padding: $t $r $bt $l;
+}
+@mixin editSize($w, $h) {
+  width: $w;
+  height: $h;
+}
+@mixin dfCenter($gap: 0px) {
+  display: flex;
+  align-items: center;
+  gap: $gap;
+}
+@mixin marginMove($ml, $mr) {
+  margin-left: $ml;
+  margin-right: $mr;
+}
+@mixin propertyText($cl: $primaryText, $fz, $fw, $lh) {
+  color: $cl;
+  font-family: "DM Sans";
+  font-size: $fz;
+  font-weight: $fw;
+  line-height: $lh; /* 136.364% */
+}
+@mixin position($t: null, $r: null, $bt: null, $l: null) {
+  position: absolute;
+  top: $t;
+  left: $l;
+  bottom: $bt;
+  right: $r;
+}
+@mixin grid($cl, $clg, $rg) {
+  display: grid;
+  grid-template-columns: repeat($cl, 1fr);
+  column-gap: $clg;
+  row-gap: $rg;
+}
+@mixin after($w, $h, $bg) {
+  content: "";
+  display: inline-block;
+  width: $w;
+  height: $h;
+  background-color: $bg;
+}
+@mixin heading($cl) {
+  color: $cl;
+  font-family: "DM Sans";
+  font-size: 5.6rem;
+  font-weight: 500;
+  line-height: 6.6rem; /* 117.857% */
+}
+@mixin subheading($w) {
+  margin-top: 20px;
+  width: $w;
+  margin: 0 auto;
+  text-align: center;
+}
+@mixin beforeAfter($w: null, $h: null, $bg: null) {
+  content: "";
+  display: block;
+  width: $w;
+  height: $h;
+  background: $bg;
+}
+*,
+::after,
+::before {
+  box-sizing: border-box;
+}
+html {
+  font-size: 62.5%;
+}
+body {
+  scroll-behavior: smooth;
+  font-size: 1.6rem;
+  font-family: "DM Sans", sans-serif;
+}
+// common
+a {
+  text-decoration: none;
+}
+button {
+  border: none;
+}
+.btn {
+  @include editSize(170px, 62px);
+  background: #5d3bee;
+  @include propertyText(#fdfdfd, 1.8rem, 700, 3rem);
+}
+
+.box_header {
+  position: relative;
+  background: $primayColor;
+  height: 100vh;
+}
+.header {
+  max-width: calc(100% - 135px);
+  @include editSize(1330, 100);
+  @include dfCenter(0);
+  justify-content: space-between;
+  @include marginMove(auto, auto);
+  &__email {
+    @include dfCenter();
+    &--link {
+      @include propertyText(#080415, 2.2rem, 500, 3rem);
+      text-decoration: underline;
+    }
+  }
+  &__nav {
+    &--link {
+      @include propertyText(#51586a, 1.8rem, 400, 0);
+    }
+    &--ul {
+      @include dfCenter(43px);
+      @include editSize(50, 50);
+    }
+  }
+}
+.hero {
+  z-index: 1;
+  margin-top: 44px;
+  &__heading {
+    margin-top: 137px;
+    @include propertyText(#080415, 8rem, 500, 7.6rem);
+  }
+  &__desc {
+    margin-top: 20px;
+    @include propertyText(#51586a, 1.8rem, 400, 3rem);
+    width: 370px;
+  }
+  &__btn {
+    margin-top: 55px;
+    @include dfCenter(30px);
+    &--link {
+      @include propertyText(#080415, 1.8rem, 700, 3rem);
+      text-decoration: underline;
+    }
+  }
+  &__social {
+    margin-top: 110px;
+    margin-bottom: 43px;
+    @include dfCenter(15px);
+    &--desc {
+      @include propertyText(#51586a, 1.6rem, 500, 3rem);
+    }
+  }
+  &__socialPage {
+    @include dfCenter(15px);
+  }
+  &__decor--1 {
+    @include position(null, null, 0, -90px);
+  }
+  &__decor--2 {
+    @include position(null, 0, 0, null);
+  }
+  &__img {
+    height: 100%;
+    &--human {
+      @include position(null, null, 0, null);
+      z-index: 1;
+    }
+  }
+}
+.brand {
+  margin-top: 100px;
+  @include dfCenter();
+  &::before {
+    margin-right: 13px;
+    margin-bottom: 70px;
+    @include after(86px, 2px, $secondColor);
+  }
+  &__heading {
+    margin-right: 105px;
+    width: 253px;
+    @include propertyText($primaryText, 4.2rem, 500, 5rem);
+  }
+  &__tag {
+    @include grid(4, 68px, 36px);
+    &--item {
+      @include dfCenter(10px);
+    }
+    &--img {
+      @include editSize(26px, 26px);
+    }
+  }
+}
+.services {
+  margin-top: 133px;
+  &-top__heading {
+    text-align: center;
+    @include heading($primaryText);
+  }
+  &-top__desc {
+    @include subheading(534px);
+    @include propertyText($primaryText-gray, 1.8rem, 400, 3rem);
+  }
+  &-bottom {
+    margin-top: 60px;
+    padding: 33px 0;
+  }
+  &__item--heading {
+    @include propertyText($primaryText, 3.2rem, 500, 4rem);
+  }
+  &__item--desc {
+    margin-top: 15px;
+    width: 285px;
+    @include propertyText($primaryText-gray, 1.8rem, 300, 3rem);
+  }
+  &-bg {
+    background: $primayColor;
+  }
+  &__item {
+    margin-left: 43px;
+  }
+}
+.Works {
+  margin-top: 140px;
+  background: #5d3bee;
+  height: 1014px;
+  &-top {
+    padding-top: 68px;
+    margin-left: 30px;
+    @include dfCenter(160px);
+    &__heading {
+      width: 468px;
+      @include propertyText(#fff, 5.6rem, 500, 6.6rem);
+    }
+    &__subheading {
+      width: 370px;
+      opacity: 0.7;
+      @include propertyText(#fff, 1.8rem, 400, 3rem);
+    }
+  }
+  &__item {
+    position: relative;
+    @include dfCenter(47px);
+    align-items: normal;
+    @include editSize(100%, 234px);
+    padding: 24px;
+    background: #fbfaff;
+    &--heading {
+      margin-top: 20px;
+      @include propertyText(#080415, 3.2rem, 500, 4rem);
+    }
+    &--subheading {
+      margin-top: 10px;
+      width: 220px;
+      @include propertyText(#51586a, 1.6rem, 400, 2.3rem);
+    }
+    &--links {
+      display: inline-block;
+      margin-top: 20px;
+      text-decoration: underline;
+      @include propertyText(#080415, 1.8rem, 700, 3rem);
+    }
+    &--image {
+      z-index: 1;
+      @include editSize(246px, 187px);
+    }
+  }
+  &__link {
+    margin-top: 80px;
+    @include editSize(170px, 62px);
+    @include propertyText($primaryText, 1.8rem, 700, 3rem);
+    @include marginMove(auto, auto);
+    &::hover {
+      background-color: #5d3bee;
+    }
+  }
+  &__decor {
+    margin-right: -20px;
+    @include position(0, 0, null, null);
+    &--img {
+      margin-left: -250px;
+    }
+  }
+}
+.item {
+  &-right,
+  &-left {
+    margin-top: 70px;
+    @include dfCenter(30px);
+    flex-direction: column;
+  }
+}
+.about {
+  position: relative;
+  margin-top: 140px;
+  background: linear-gradient(to bottom, #fff 50%, #fbfaff 50%);
+  &__subheading {
+    @include dfCenter(9px);
+    justify-content: center;
+    &--content {
+      @include propertyText($secondColor, 3.2rem, 500, 4rem);
+    }
+  }
+  &__heading {
+    margin-top: 10px;
+    text-align: center;
+    @include propertyText($primaryText, 5.6rem, 500, 6.6rem);
+  }
+  &__desc {
+    margin-top: 15px;
+    text-align: center;
+    @include editSize(570px, null);
+    @include marginMove(auto, auto);
+  }
+  &__rating {
+    @include dfCenter(156px);
+    justify-content: center;
+  }
+  &__stats {
+    @include propertyText($primaryText, 5.6rem, 500, 7.6rem);
+    &::after {
+      margin-bottom: 10px;
+      @include beforeAfter(111px, 3px, $primaryText);
+    }
+    &--desc {
+      @include propertyText($primaryText-gray, 1.8rem, 400, 3rem);
+    }
+  }
+  &__border {
+    margin-top: 90px;
+    &::before,
+    &::after {
+      margin-top: 20px;
+      @include beforeAfter(946px, 1px, $primaryText);
+      opacity: 0.2;
+      @include marginMove(auto, auto);
+    }
+    &::before {
+      margin-bottom: 20px;
+    }
+  }
+  &__video {
+    position: relative;
+    margin-top: 70px;
+    @include editSize(1170px, 628px);
+    @include marginMove(auto, auto);
+    &--iframe {
+      @include editSize(100%, 100%);
+      background: #080415;
+    }
+    &--btn {
+      @include editSize(170px, 62px);
+      background: #fbfaff;
+      @include propertyText(#51586a, 1.8rem, 700, 3rem);
+      @include position(null, 10px, 10px, null);
+    }
+  }
+  &__decor {
+    @include position(null, null, 0, 0);
+  }
+  &__decor2 {
+    @include position(null, 0, 0, null);
+  }
+}
+
+.review {
+  margin-top: 150px;
+  &__heading {
+    @include propertyText($primaryText, 5.6rem, 500, 6.6rem);
+    text-align: center;
+  }
+  &__desc {
+    margin-top: 20px;
+    width: 570px;
+    @include propertyText($primaryText-gray, 1.8rem, 400, 3rem);
+    text-align: center;
+    @include marginMove(auto, auto);
+  }
+  &__list {
+    margin-top: 40px;
+    @include editSize(697px, null);
+    @include marginMove(auto, auto);
+    @include dfCenter();
+    overflow: hidden;
+  }
+  &__item--content {
+    @extend .review__desc;
+    @include editSize(697px, 114px);
+    @include propertyText(#51586a, 24px, 400, 4rem);
+  }
+  &__item--info {
+    margin-top: 36px;
+    @include dfCenter(15px);
+    justify-content: center;
+  }
+  &__item--name {
+    @include propertyText($primaryText, 3rem, 500, 4rem);
+  }
+  &__item--subInfo {
+    @include propertyText(&$primaryText-gray, 1.6rem, 400, 2.9rem);
+    text-align: center;
+  }
+}
+.lines {
+  margin-top: 40px;
+  @include dfCenter(20px);
+  justify-content: center;
+  padding-bottom: 74px;
+}
+.line {
+  border-radius: 50%;
+  background: $primaryText-gray;
+  @include editSize(16px, 16px);
+}
+.faq {
+  margin-top: 95px;
+  &-heading {
+    @include propertyText($primaryText, 5.6rem, 500, 66px);
+    width: 575px;
+  }
+  &-container {
+    margin-top: 20px;
+  }
+  &-item {
+    &__container--header {
+      @include dfCenter();
+      justify-content: space-between;
+      align-items: center;
+      svg {
+        margin-top: 60px;
+      }
+    }
+    &::after {
+      margin-top: 21px;
+      @include after(100%, 2px, #08182f);
+    }
+    &__heading {
+      margin-top: 60px;
+      @include propertyText(#080415, 3.2rem, 500, 40px);
+    }
+    &__content {
+      display: none;
+      margin-top: 23px;
+      @include editSize(487px, 57px);
+      @include propertyText(#51586a, 1.8rem, 400, 30px);
+    }
+  }
+}
+.gallery {
+  margin-top: 160px;
+  &__heading {
+    @include propertyText(#080415, 56px, 500, 66px);
+    text-align: center;
+  }
+  &__subheading {
+    margin-top: 20px;
+    @include propertyText(#51586a, 18px, 400, 30px);
+    width: 528px;
+    text-align: center;
+    @include marginMove(auto, auto);
+  }
+  &__link {
+    margin-top: 30px;
+    @include dfCenter();
+    justify-content: center;
+    @include propertyText(#5d3bee, 3.2rem, 500, 40px);
+    text-decoration: underline;
+  }
+  &__container {
+    margin-top: 70px;
+    @include dfCenter(30px);
+    justify-content: space-between;
+  }
+  &__img {
+    @include editSize(370px, 529px);
+  }
+}
+.cta {
+  margin-top: 140px;
+  &__bg {
+    position: relative;
+    z-index: 2;
+    @include padding(68px, 380px, 68px, 380px);
+    background-color: #fbfaff;
+    @include dfCenter();
+    flex-direction: column;
+  }
+  &__heading {
+    width: 570px;
+    @include propertyText(#080415, 56px, 500, 66px);
+  }
+  &__subheading {
+    width: 570px;
+    @include propertyText($primaryText-gray, 18px, 400, 30px);
+    text-align: center;
+  }
+  &__link {
+    margin-top: 50px;
+    display: block;
+    @include editSize(170px, 62px);
+    @include dfCenter();
+    justify-content: center;
+    background-color: #5d3bee;
+    @include propertyText(#fdfdfd, 1.8rem, 700, 30px);
+  }
+  &__decor {
+    @include position(0px, 0, 0, 200px);
+    &--left {
+      @include position(null, 0, 0, 0);
+    }
+    &--right {
+      @include position(0, 0, 0, null);
+      rotate: 180deg;
+    }
+  }
+}
+.footer {
+  margin-top: 50px;
+  &__desc {
+    @include propertyText(#525771, 1.8rem, 400, 30px);
+  }
+  &__container {
+    margin-top: 20px;
+    @include dfCenter(515px);
+    justify-content: center;
+  }
+  &__policy {
+    @include dfCenter();
+  }
+  &__line {
+    margin-top: 30px;
+    width: 100%;
+    height: 1px;
+    background: #0c0720;
+  }
+}
